@@ -1,0 +1,3 @@
+[submodule "BugsBunny/vendor/spdlog"]
+	path = BugsBunny/vendor/spdlog
+	url = https://github.com/gabime/spdlog
