@@ -1,8 +1,7 @@
 #pragma once
 
 #include "BugsBunny\Core.h"
-#include <string>;
-#include <functional>
+
 
 namespace BugsBunny {
 

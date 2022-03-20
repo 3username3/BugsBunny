@@ -139,6 +139,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\bbpch.h" />
     <ClInclude Include="src\BugsBunny.h" />
     <ClInclude Include="src\BugsBunny\Application.h" />
     <ClInclude Include="src\BugsBunny\Core.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="src\BugsBunny\Log.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\bbpch.cpp" />
     <ClCompile Include="src\BugsBunny\Application.cpp" />
     <ClCompile Include="src\BugsBunny\Log.cpp" />
   </ItemGroup>

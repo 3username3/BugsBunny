@@ -1,3 +1,4 @@
+#include "bbpch.h"
 #include "Application.h"
 
 #include "BugsBunny/Events/ApplicationEvent.h"
@@ -26,7 +27,7 @@ namespace BugsBunny {
 			BB_TRACE(e);
 		}
 
-		while (true);
+		while (true); 
 
 	}
 }

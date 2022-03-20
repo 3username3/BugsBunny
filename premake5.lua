@@ -16,10 +16,15 @@ workspace "BugsBunny"
 
 		location "BugsBunny" 
 		kind"SharedLib"
-		language"C++"
+		language"C++" 
 
 		targetdir ("bin/" ..outputdir .. "/%{prj.name}")
 		objdir ("bin-int/" ..outputdir .. "/%{prj.name}")
+		 
+		--specify which header file is our pch header
+		pchheader "bbpch.h" 
+		--only needed vor VisualStudio to create pch file
+		pchsource "BugsBunny/src/bbpch.cpp" 
 
 		files 
 		{
