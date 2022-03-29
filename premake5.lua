@@ -68,7 +68,8 @@ include "BugsBunny/vendor/GLFW"
 
 		postbuildcommands
 		{
-		("{COPY} %{cfg.buildtarget.relpath} ../bin/"..outputdir.."/Sandbox")
+		("{MKDIR} ../bin/" ..outputdir.. "/Sandbox"),
+		("{COPY} %{cfg.buildtarget.relpath}../bin/" ..outputdir.. "/Sandbox")
 		}
 	
 	filter "configurations:Debug"
@@ -91,8 +92,8 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/"..outputdir.."/%{prj.name}")
-	objdir ("bin-int/"..outputdir.."/%{prj.name}")
+	targetdir ("bin/" ..outputdir.. "/%{prj.name}")
+	objdir ("bin-int/" ..outputdir.. "/%{prj.name}")
 
 	files 
 		{
