@@ -1,3 +1,6 @@
 [submodule "BugsBunny/vendor/spdlog"]
 	path = BugsBunny/vendor/spdlog
 	url = https://github.com/gabime/spdlog
+[submodule "BugsBunny/vendor/GLFW"]
+	path = BugsBunny/vendor/GLFW
+	url = https://github.com/TheCherno/glfw
