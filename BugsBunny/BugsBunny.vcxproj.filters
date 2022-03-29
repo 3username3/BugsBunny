@@ -7,6 +7,9 @@
     <Filter Include="BugsBunny\Events">
       <UniqueIdentifier>{86FF5FD4-72F8-7E26-9B2A-64AB87825E32}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\BugsBunny.h" />
@@ -34,6 +37,12 @@
     <ClInclude Include="src\BugsBunny\Log.h">
       <Filter>BugsBunny</Filter>
     </ClInclude>
+    <ClInclude Include="src\BugsBunny\Window.h">
+      <Filter>BugsBunny</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\WindowsWindow.h">
+      <Filter>Platform</Filter>
+    </ClInclude>
     <ClInclude Include="src\bbpch.h" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +51,9 @@
     </ClCompile>
     <ClCompile Include="src\BugsBunny\Log.cpp">
       <Filter>BugsBunny</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\WindowsWindow.cpp">
+      <Filter>Platform</Filter>
     </ClCompile>
     <ClCompile Include="src\bbpch.cpp" />
   </ItemGroup>

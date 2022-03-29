@@ -22,6 +22,8 @@ could even slow down the compilation time.
 #include <unordered_map>
 #include <unordered_set>
 
+#include"BugsBunny/Log.h"
+
 #ifdef BB_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif

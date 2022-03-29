@@ -10,7 +10,13 @@ workspace "BugsBunny"
 		"Dist"
 	}
 
-	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "BugsBunny/vendor/GLFW/include"
+ 
+include "BugsBunny/vendor/GLFW"
 
 	project "BugsBunny"
 
@@ -18,8 +24,8 @@ workspace "BugsBunny"
 		kind"SharedLib"
 		language"C++" 
 
-		targetdir ("bin/" ..outputdir .. "/%{prj.name}")
-		objdir ("bin-int/" ..outputdir .. "/%{prj.name}")
+		targetdir ("bin/"..outputdir.."/%{prj.name}")
+		objdir ("bin-int/"..outputdir.."/%{prj.name}")
 		 
 		--specify which header file is our pch header
 		pchheader "bbpch.h" 
@@ -36,9 +42,17 @@ workspace "BugsBunny"
 
 		includedirs
 		{
-			"%{prj.name}/src",
-			"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}"
 		}
+		
+		--link GLFW to BugsBunny and is now dependent on it 
+		links
+	{
+		"GLFW",
+		"opengl32.lib"
+	}
 
 
 		filter "system:windows"
@@ -49,24 +63,27 @@ workspace "BugsBunny"
 		defines
 		{
 		"BB_BUILD_DLL",
-		"BB_PLATFORM_WINDOWS",   	
+		"BB_PLATFORM_WINDOWS"
 		}
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" ..outputdir.. "/Sandbox")
+		("{COPY} %{cfg.buildtarget.relpath} ../bin/"..outputdir.."/Sandbox")
 		}
 	
 	filter "configurations:Debug"
 		defines "BB_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "BB_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "BB_DIST"
+		buildoptions "/MD"
 		symbols "On"
  
 project "Sandbox"
@@ -74,8 +91,8 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 
-	targetdir ("bin/" ..outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" ..outputdir .. "/%{prj.name}")
+	targetdir ("bin/"..outputdir.."/%{prj.name}")
+	objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
 	files 
 		{
@@ -105,17 +122,20 @@ project "Sandbox"
 
 		defines
 		{ 
-		"BB_PLATFORM_WINDOWS",   	
+		"BB_PLATFORM_WINDOWS",
 		}
 	
 	filter "configurations:Debug"
 		defines "BB_DEBUG"
+		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "BB_RELEASE"
+		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "BB_DIST"
-		symbols "On"
+		buildoptions "/MD"
+		optimize "On"
