@@ -1,4 +1,4 @@
-//Mouse event has x and y coordinates to indicate position of mouse
+//Mouse events return x and y coordinates to indicate the position of mouse.
 #pragma once
 
 #include "Event.h"
@@ -30,7 +30,7 @@ namespace BugsBunny {
 	};
 
 
-	//Includes x AND y coordinates, because some mice can scroll horizontally
+	//We need to include x AND y coordinates, because some mice can scroll horizontally.
 	class MouseScrolledEvent : public Event
 	{
 	public:

@@ -2,7 +2,6 @@
 
 #include "Event.h"
 
-
 namespace BugsBunny {
 
 	class WindowResizeEvent : public Event
@@ -37,6 +36,8 @@ namespace BugsBunny {
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
+
+	//Is used, if ticking, updating and rendering should be propagated as events
 	class AppTickEvent : public Event
 	{
 	public:

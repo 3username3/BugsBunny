@@ -1,12 +1,11 @@
-//Key Events = if keys are pressed or released on keyboard
-//Key Released: doesn't need any other information, than that it was released
-//Key Pressed: is key press a repeated event 
-//Butt key release & press events have key code in common
+//Key events refer to whether keys are pressed or released on the keyboard.
+//Key Released: Doesn't need any other information, than that it was released.
+//Key Pressed: Needs some additional information like e.g. is the key press a repeated event?
+//Despite that, key release & press events have key code in common.
 
 #pragma once
 
 #include "Event.h" 
-
 
 namespace BugsBunny {
 
@@ -34,7 +33,7 @@ namespace BugsBunny {
 
 		std::string ToString() const override
 		{
-			//prints which key event was pressed and the amount of times it was pressed
+			//Prints which key was pressed and the amount of times it was pressed.
 			std::stringstream ss;
 			ss << "KeyPressedEvent: " << m_KeyCode << " (" << m_RepeatCount << " repeats)";
 			return ss.str();

@@ -10,6 +10,8 @@ workspace "BugsBunny"
 		"Dist"
 	}
 
+startproject "Sandbox"
+
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
@@ -47,7 +49,7 @@ include "BugsBunny/vendor/GLFW"
 		"%{IncludeDir.GLFW}"
 		}
 		
-		--link GLFW to BugsBunny and is now dependent on it 
+		--link GLFW to BugsBunny
 		links
 	{
 		"GLFW",
@@ -109,8 +111,7 @@ project "Sandbox"
 			"BugsBunny/src"
 		}
 
-		--link BugsBunny
-
+		--link BugsBunny to Sandbox
 		links 
 		{
 			"BugsBunny"

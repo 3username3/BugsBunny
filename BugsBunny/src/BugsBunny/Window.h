@@ -39,7 +39,7 @@ namespace BugsBunny {
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
-		//implemented per platform
+		//Gets implemented per platform.
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
 

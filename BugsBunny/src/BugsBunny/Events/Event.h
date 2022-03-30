@@ -5,12 +5,7 @@
 
 namespace BugsBunny {
 
-	// Events in Hazel are currently blocking, meaning when an event occurs it
-	// immediately gets dispatched and must be dealt with right then an there.
-	// For the future, a better strategy might be to buffer events in an event
-	// bus and process them during the "event" part of the update stage.
-
-	//describes event type - defined in different header files
+	//Describes event types that are defined in the Events header files.
 	enum class EventType
 	{
 		None = 0,
@@ -20,9 +15,8 @@ namespace BugsBunny {
 		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled
 	};
 
-	//to filter certain events;  want a BIT-field, so we are able to apply multiple
-	//categories to a certain event type
-
+	//Is used to filter certain events. By using bit fields, we are able to apply multiple
+	//categories for a single event type.
 	enum EventCategory 
 	{
 		None = 0,
@@ -33,41 +27,37 @@ namespace BugsBunny {
 		EventCategoryMouseButton = BIT(4)
 	};
 
-//instead of writing all this code for every event implementation,
-//the EVENT_CLASS_TYPE & EVENT_CLASS_CATEGORY macro has been defined
-//why stativ vs virtual event???
+//EVENT_CLASS_TYPE & EVENT_CLASS_CATEGORY macros have been defined to omit writing all the code
+//that is needed to reutrn the type and category of an event for each event.
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	//base class for events
 	class Event
 	{
 	public:
 
-		//check whether event was already handled or not
+		//Checks whether an event was already handled or not.
 		bool Handled = false;
 
 		virtual EventType GetEventType() const = 0;
 		virtual const char* GetName() const = 0;
 		virtual int GetCategoryFlags() const = 0;
-		//function to print further informations regarding a random event
 		virtual std::string ToString() const { return GetName(); }
 
-		//Checks whether event belongs to given category 
-		//If it returns 0 => not in category, anything else => at least in
-		//the category for which the number was returned
+		//Checks whether the event belongs to a given category.
+		//If it returns 0 => event is not in category, anything else => event is 
+		//at least in the category for which the number was returned.
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}
 	};
 
-	//dispatch events based on their type
-	//receive event reference and don't know what kind of event that is
-	//e.g. if event type is key event, call key pressed function
+	//Dispatches events based on their type:
+	//e.g. if the event type is an key pressed event, it calls the key pressed function.
 	class EventDispatcher
 	{
 		template<typename T>
