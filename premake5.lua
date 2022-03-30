@@ -9,8 +9,7 @@ workspace "BugsBunny"
 		"Release",
 		"Dist"
 	}
-
-startproject "Sandbox"
+	startproject "Sandbox"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
@@ -20,58 +19,51 @@ IncludeDir["GLFW"] = "BugsBunny/vendor/GLFW/include"
  
 include "BugsBunny/vendor/GLFW"
 
-	project "BugsBunny"
+project "BugsBunny"
+	location "BugsBunny" 
+	kind"SharedLib"
+	language"C++" 
 
-		location "BugsBunny" 
-		kind"SharedLib"
-		language"C++" 
-
-		targetdir ("bin/"..outputdir.."/%{prj.name}")
-		objdir ("bin-int/"..outputdir.."/%{prj.name}")
+	targetdir ("bin/"..outputdir.."/%{prj.name}")
+	objdir ("bin-int/"..outputdir.."/%{prj.name}")
 		 
-		--specify which header file is our pch header
-		pchheader "bbpch.h" 
-		--only needed vor VisualStudio to create pch file
-		pchsource "BugsBunny/src/bbpch.cpp" 
+	--specify which header file is our pch header
+	pchheader "bbpch.h" 
+	--only needed vor VisualStudio to create pch file
+	pchsource "BugsBunny/src/bbpch.cpp" 
 
-		files 
-		{
-
+	files {
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
+	}
 
-		}
-
-		includedirs
-		{
+	includedirs {
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}"
-		}
+	}
 		
-		--link GLFW to BugsBunny
-		links
-	{
+	--link GLFW to BugsBunny
+	links {
 		"GLFW",
 		"opengl32.lib"
 	}
 
 
-		filter "system:windows"
+	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest" 
-
-		defines
-		{
-		"BB_BUILD_DLL",
-		"BB_PLATFORM_WINDOWS"
+		
+		defines	{
+			"BB_BUILD_DLL",
+			"BB_PLATFORM_WINDOWS"
 		}
 
 		postbuildcommands
 		{
-		("{MKDIR} ../bin/" ..outputdir.. "/Sandbox"),
-		("{COPY} %{cfg.buildtarget.relpath}../bin/" ..outputdir.. "/Sandbox")
+			("{MKDIR} ../bin/" .. outputdir .. "/Sandbox"),
+			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 	
 	filter "configurations:Debug"
@@ -102,7 +94,6 @@ project "Sandbox"
 
 		"%{prj.name}/**.h",
 		"%{prj.name}/**.cpp",
-
 		}
 
 		includedirs

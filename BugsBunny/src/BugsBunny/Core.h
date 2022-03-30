@@ -13,7 +13,7 @@
 		//For Sandbox "import" is active.
 		#define BB_API _declspec(dllimport)
 
-	#endif // BB_BUILD_DLL
+	#endif //BB_BUILD_DLL
 
 #else
 
